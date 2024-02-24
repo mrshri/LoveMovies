@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDataFromAPI } from "./utils/api";
-import { getApiConfiguration } from "./store/homeSlice";
+import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/home/Home";
@@ -16,6 +16,7 @@ function App() {
   const { url } = useSelector((state) => state.home);
   useEffect(() => {
     fetchApiConfig();
+    genresCall();
   }, []);
   const fetchApiConfig = () => {
     fetchDataFromAPI("/configuration")
@@ -31,6 +32,22 @@ function App() {
 
       .catch((err) => console.error(err));
   };
+
+  const genresCall = async () => {
+    let promises = [];
+    let endPoints = ["movie", "tv"];
+    let allGenres = {};
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromAPI(`/genre/${url}/list`));
+    });
+
+    const data = await Promise.all(promises);
+
+    data.map(({ genres }) => {
+      return genres.map((item) => (allGenres[item.id] = item));
+    });
+    dispatch(getGenres(allGenres));
+  };
   return (
     <>
       <BrowserRouter>
@@ -42,7 +59,7 @@ function App() {
           <Route path="/explore/:mediaType" element={<Explore />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </>
   );
