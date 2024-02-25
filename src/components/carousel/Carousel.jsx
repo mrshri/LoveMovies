@@ -13,7 +13,7 @@ import {
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
@@ -45,6 +45,7 @@ const Carousel = ({ data, loading }) => {
   return (
     <div className="carousel">
       <ContentWrapper>
+        {title && <div className="carouselTitle">{title}</div>}
         <BsFillArrowLeftCircleFill
           className="carouselLeftNav arrow"
           onClick={() => navigation("left")}
@@ -54,17 +55,19 @@ const Carousel = ({ data, loading }) => {
           onClick={() => navigation("right")}
         />
         {!loading ? (
-          <div
-            className="carouselItems"
-            ref={carouselContainer}
-            onClick={() => navigate(`/${item.media_type} ${item.id}`)}
-          >
+          <div className="carouselItems" ref={carouselContainer}>
             {data?.map((item) => {
               const posterUrl = item.poster_path
                 ? url.poster + item.poster_path
                 : PosterFallBack;
               return (
-                <div key={item.id} className="carouselItem">
+                <div
+                  key={item.id}
+                  className="carouselItem"
+                  onClick={() =>
+                    navigate(`/${item.media_type || endpoint}/${item.id}`)
+                  }
+                >
                   <div className="posterBlock">
                     <Img src={posterUrl} />
                     <CircleRating rating={item.vote_average.toFixed(1)} />
@@ -72,9 +75,13 @@ const Carousel = ({ data, loading }) => {
                   </div>
                   <div className="textBlock">
                     <span className="title">{item.title || item.name}</span>
-                    <span className="date">
-                      {dayjs(item.release_Date).format("MMM D, YYYY")}
-                    </span>
+                    {item?.release_date && (
+                      <div className="date">
+                        <span>
+                          {dayjs(item?.release_date).format("MMM D,YYYY")}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               );

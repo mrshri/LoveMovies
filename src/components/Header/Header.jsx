@@ -8,9 +8,9 @@ import "./Header.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movie-logo.png";
+import LoveMovie from "../../assets/LoveMovie.svg";
 
 const Header = () => {
-  const headertitle = "LoveMovie";
   const [show, setShow] = useState("top");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -79,9 +79,9 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo">
-          <img src={logo} alt="" style={{ width: "25px", left: 0 }} />
-          {headertitle}
+        <div className="logo" onClick={() => navigate("/")}>
+          <img src={logo} alt="logo" />
+          <img src={LoveMovie} alt="LoveMovie" />
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>

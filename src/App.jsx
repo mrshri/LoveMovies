@@ -21,7 +21,6 @@ function App() {
   const fetchApiConfig = () => {
     fetchDataFromAPI("/configuration")
       .then((response) => {
-        console.log(response);
         const url = {
           backDrop: response.images.secure_base_url + "original",
           poster: response.images.secure_base_url + "original",

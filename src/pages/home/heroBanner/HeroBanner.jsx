@@ -32,7 +32,7 @@ const HeroBanner = () => {
           <Img src={background} />
         </div>
       )}
-      <div className="opacity-layer"></div>
+      <div className="opacity-layer" />
       <ContentWrapper>
         <div className="heroBannerContent">
           <span className="title">Welcome</span>
