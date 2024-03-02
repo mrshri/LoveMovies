@@ -12,12 +12,15 @@ const HeroBanner = () => {
   const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch("/movie/popular");
 
-  useEffect(() => {
-    const bg =
-      url.backDrop +
-      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
-    setBackGround(bg);
-  });
+  useEffect(
+    () => {
+      const bg =
+        url.backDrop +
+        data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
+      setBackGround(bg);
+    },
+    [data]
+  );
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
