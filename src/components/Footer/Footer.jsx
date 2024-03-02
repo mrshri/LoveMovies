@@ -21,7 +21,9 @@ const Footer = () => {
           <li className="menuItem">Blog</li>
           <li className="menuItem">FAQ</li>
         </ul>
-        <div className="infoText">We provide recommendation for movies.</div>
+        <div className="infoText">
+          this web App provide Movies & TV shows recommendation.
+        </div>
         <div className="socialIcons">
           <span className="icon">
             <FaInstagram />
