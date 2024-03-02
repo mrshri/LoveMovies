@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedin,
-} from "react-icons/fa";
+import { FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 
@@ -22,9 +17,9 @@ const Footer = () => {
           <li className="menuItem">FAQ</li>
         </ul>
         <div className="infoText">
-          this web App provide Movies & TV shows recommendation.
+          This web App provide Movies & TV shows recommendation.
         </div>
-        <div className="socialIcons">
+        {/* <div className="socialIcons">
           <span className="icon">
             <FaInstagram />
           </span>
@@ -32,9 +27,9 @@ const Footer = () => {
             <FaTwitter />
           </span>
           <span className="icon">
-            <FaLinkedin />
+            <FaLinkedin  />
           </span>
-        </div>
+        </div> */}
       </ContentWrapper>
     </footer>
   );
